@@ -4,11 +4,7 @@ import { config } from "dotenv";
 
 import workoutRoutes from "./routes/workouts.js";
 
-if (process.env.NODE_ENV === "production") {
-} else {
-  config();
-}
-
+config();
 const app = express();
 // middleware
 app.use(express.json());
