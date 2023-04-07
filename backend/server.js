@@ -1,10 +1,13 @@
-import { config } from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
+import { config } from "dotenv";
 
 import workoutRoutes from "./routes/workouts.js";
 
-config();
+if (process.env.NODE_ENV === "production") {
+} else {
+  config();
+}
 
 const app = express();
 // middleware
