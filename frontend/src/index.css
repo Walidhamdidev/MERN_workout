@@ -39,6 +39,7 @@ code {
   border: 1px solid rgba(0, 0, 0, 0.354);
   margin: 10px 0;
   padding: 10px;
+  max-width: fit-content;
 }
 
 .title,
@@ -89,4 +90,12 @@ code {
 /* error */
 .error-label {
   color: red;
+}
+
+/* workout details */
+.btn-delete {
+  margin-left: 20px;
+  padding: 8px 10px;
+  background-color: rgba(216, 24, 24, 0.505);
+  border: none;
 }
