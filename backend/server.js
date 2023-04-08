@@ -9,7 +9,14 @@ config();
 const app = express();
 // middleware
 app.use(express.json());
-app.use(cors({ origin: "http://localhost:3000" }));
+
+if (process.env.NODE_ENV === "development") {
+  app.use(cors({ origin: "http://localhost:3000" }));
+}
+
+if (process.env.NODE_ENV === "production") {
+  app.use(cors({ origin: "https://workout-frontend-1und.onrender.com" }));
+}
 
 // routes
 app.use("/api/workouts", workoutRoutes);

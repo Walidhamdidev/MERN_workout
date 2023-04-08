@@ -1,0 +1,27 @@
+# POST http://localhost:4000/api/workouts
+# content-type: application/json
+
+# {
+#     "title": "squats",
+#     "reps": 20,
+#     "load":0
+# }
+
+
+# get all workouts
+# GET http://localhost:4000/api/workouts
+
+# get one workout
+# GET http://localhost:4000/api/workouts/643042f471acdacb69c3b9b7
+
+
+# update workout
+PATCH  http://localhost:4000/api/workouts/643042f471acdacb69c3b9b7
+
+{
+    "title": "pullups"
+}
+
+# delete workout
+
+# DELETE http://localhost:4000/api/workouts/643028326d68ae6176f9a5c2
