@@ -1,5 +1,6 @@
 import { useState } from "react";
 import useWorkoutContext from "../hooks/useWorkoutContext";
+import Error from "./Error";
 
 function WorkoutForm() {
   const [title, setTitle] = useState("");
@@ -16,16 +17,13 @@ function WorkoutForm() {
     if (!title || !load || !reps) return;
     try {
       setLoading(true);
-      const response = await fetch(
-        "https://mern-backend-r1eb.onrender.com/api/workouts",
-        {
-          method: "POST",
-          body: JSON.stringify({ title, load, reps }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(process.env.REACT_APP_API_ENDPOINT, {
+        method: "POST",
+        body: JSON.stringify({ title, load, reps }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       const json = await response.json();
       setLoading(false);
       if (response.ok) {
@@ -43,7 +41,8 @@ function WorkoutForm() {
 
   return (
     <form className="form" onSubmit={handleSubmit}>
-      {error ? <p>{error}</p> : null}
+      {error ? <Error label={error.toString()} /> : null}
+
       <input
         className="input"
         placeholder="Title"

@@ -80,3 +80,13 @@ code {
 .about-content {
   margin: 20px 0;
 }
+
+/* loading */
+.loading {
+  text-align: center;
+}
+
+/* error */
+.error-label {
+  color: red;
+}
