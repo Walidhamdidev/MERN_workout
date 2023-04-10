@@ -1,19 +1,25 @@
 import { useState } from "react";
 import useWorkoutContext from "../hooks/useWorkoutContext";
+import useAuthContext from "../hooks/useAuthContext";
 
 function WorkoutDetails({ workout }) {
   const { dispatch } = useWorkoutContext();
+  const {
+    state: { user },
+  } = useAuthContext();
+
   const [loading, setLoading] = useState(false);
 
   const handleDelete = async () => {
+    if (!user) return;
     try {
       setLoading(true);
       const response = await fetch(
-        `${process.env.REACT_APP_API_ENDPOINT}/${workout._id}`,
+        `${process.env.REACT_APP_API_ENDPOINT}/workouts/${workout._id}`,
         {
           method: "DELETE",
           headers: {
-            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.jwt}`,
           },
         }
       );

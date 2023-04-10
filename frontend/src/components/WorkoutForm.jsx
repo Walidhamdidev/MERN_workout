@@ -1,6 +1,7 @@
 import { useState } from "react";
 import useWorkoutContext from "../hooks/useWorkoutContext";
 import Error from "./Error";
+import useAuthContext from "../hooks/useAuthContext";
 
 function WorkoutForm() {
   const [title, setTitle] = useState("");
@@ -10,20 +11,29 @@ function WorkoutForm() {
   const [loading, setLoading] = useState(false);
 
   const { dispatch } = useWorkoutContext();
+  const {
+    state: { user },
+  } = useAuthContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(title, load, reps);
+    if (!user) return setError("You must be authenticated first.");
+
     if (!title || !load || !reps) return;
+
     try {
       setLoading(true);
-      const response = await fetch(process.env.REACT_APP_API_ENDPOINT, {
-        method: "POST",
-        body: JSON.stringify({ title, load, reps }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_API_ENDPOINT}/workouts`,
+        {
+          method: "POST",
+          body: JSON.stringify({ title, load, reps }),
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
       const json = await response.json();
       setLoading(false);
       if (response.ok) {
@@ -33,7 +43,8 @@ function WorkoutForm() {
         setReps(0);
         setLoad(0);
       }
-      if (!response.ok) return setError(json.error);
+
+      if (!response.ok) return setError("Response not ok!");
     } catch (error) {
       return setError(error);
     }

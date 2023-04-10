@@ -4,9 +4,13 @@ import WorkoutForm from "../components/WorkoutForm";
 import useWorkoutContext from "../hooks/useWorkoutContext";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
+import useAuthContext from "../hooks/useAuthContext";
 
 function Home() {
   const { state, dispatch } = useWorkoutContext();
+  const {
+    state: { user },
+  } = useAuthContext();
 
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -15,7 +19,15 @@ function Home() {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`${process.env.REACT_APP_API_ENDPOINT}`);
+        const response = await fetch(
+          `${process.env.REACT_APP_API_ENDPOINT}/workouts`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${user.token}`,
+            },
+          }
+        );
         const json = await response.json();
         setError(null);
         setLoading(false);
@@ -28,8 +40,8 @@ function Home() {
         return setError(error);
       }
     };
-    fetchData();
-  }, [dispatch]);
+    if (user) fetchData();
+  }, [dispatch, user]);
 
   return (
     <div className="container">
