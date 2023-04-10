@@ -1,0 +1,57 @@
+# POST http://localhost:4000/api/workouts
+# content-type: application/json
+
+# {
+#     "title": "squats",
+#     "reps": 20,
+#     "load":0
+# }
+
+
+# get all workouts
+GET http://localhost:4000/api/workouts
+Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MzM1MTE4OTNkM2Q4YjA1ZGM5NGRhOSIsImlhdCI6MTY4MTA4NDkzOSwiZXhwIjoxNjgxMDg4NTM5fQ.J-J5j3qWUOHSj_11LzMbEZFUf1z0wRq_YtEmUxNa7ns`
+
+ 
+
+
+# get one workout
+# GET http://localhost:4000/api/workouts/643042f471acdacb69c3b9b7
+
+
+# update workout
+# PATCH  http://localhost:4000/api/workouts/643042f471acdacb69c3b9b7
+
+# {
+#     "title": "pullups"
+# }
+
+# delete workout
+
+# DELETE http://localhost:4000/api/workouts/643028326d68ae6176f9a5c2
+
+
+
+
+
+# signup user
+# POST http://localhost:4000/api/user/signup
+# content-type: application/json
+
+# {
+#     "email": "waliddkz12@gmail.com",
+#     "password": "1A@@walido123"   
+# }
+
+#  login user
+# POST http://localhost:4000/api/user/login
+# content-type: application/json
+
+# {
+#     "email": "walidhamdidev@gmail.com",
+#     "password": "1A@@walido123"   
+# }
+
+
+
+

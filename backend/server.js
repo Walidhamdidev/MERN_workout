@@ -4,6 +4,7 @@ import cors from "cors";
 import { config } from "dotenv";
 
 import workoutRoutes from "./routes/workouts.js";
+import userRoutes from "./routes/user.js";
 
 config();
 const app = express();
@@ -18,6 +19,7 @@ if (process.env.NODE_ENV === "production") {
 
 // routes
 app.use("/api/workouts", workoutRoutes);
+app.use("/api/user", userRoutes);
 
 // connect to mongodb
 try {
